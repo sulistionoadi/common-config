@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sulistionoadi.ngoprek</groupId>
+	<artifactId>common-config</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Common Configuration</name>
+	<description>Common Configuration for All Applications</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<encoding>UTF-8</encoding>
+		<project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+		<project.resources.sourceEncoding>${encoding}</project.resources.sourceEncoding>
+		<archetype.encoding>${encoding}</archetype.encoding>
+		
+		<common-dao-jdbc.version>1.1.1-SNAPSHOT</common-dao-jdbc.version>
+		<lombok.version>1.18.16</lombok.version>
+	</properties>
+	
+	<scm>
+		<developerConnection>scm:git:git@github.com:sulistionoadi/common-config.git</developerConnection>
+		<connection>scm:git:git@github.com:sulistionoadi/common-config.git</connection>
+		<url>https://github.com/sulistionoadi/common-config</url>
+		<tag>1.2.0</tag>
+	</scm>
+	
+	<distributionManagement>
+		<repository>
+			<id>comsuRepo</id>
+			<url>${comsu.repo.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>comsuRepo</id>
+			<url>${comsu.repo.url}</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sulistionoadi.ngoprek</groupId>
+			<artifactId>common-dao-jdbc</artifactId>
+			<version>${common-dao-jdbc.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>3.0.0-M1</version>
+				<configuration>
+					<goals>pre-integration-test</goals>
+					<preparationGoals>package</preparationGoals>
+					<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+					<tagNameFormat>@{project.version}</tagNameFormat>
+					<remoteTagging>false</remoteTagging>
+					<branchName>master</branchName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
